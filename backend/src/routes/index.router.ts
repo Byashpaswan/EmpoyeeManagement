@@ -1,8 +1,8 @@
-import express from 'express';
+import { Router } from "express";
+import employeeRoute from './employee/employee.router';
 
-const indexRouter = express.Router();
+const indexRouter = Router()
 
-
-
-
-module.exports = indexRouter;
+ indexRouter.use("/employee",employeeRoute)
+ 
+export default indexRouter
