@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Employee } from '../../../../shared/models/employee.model';
 import { RouterLink } from '@angular/router';
 import { debounceTime, distinctUntilChanged, startWith, Subject, switchMap, takeUntil } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-employeelist',
   imports: [CommonModule,RouterLink],
@@ -20,7 +20,7 @@ employees: Employee[] = [];
   // cleanup stream
   private destroy$ = new Subject<void>();
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService,private toastService:ToastrService) {}
 
   ngOnInit(): void {
     this.search$
@@ -44,12 +44,16 @@ employees: Employee[] = [];
   }
 
   delete(id: number): void {
-    this.employeeService.delete(id).subscribe(() => {
-      // refresh after delete
-      this.search$.next('');
-      this.ngOnInit()
-    });
-  }
+  this.employeeService.delete(id).subscribe({
+    next: (res:any) => {
+      this.employees = this.employees.filter(e => e.id !== id);
+      this.toastService.success(res['message'],'success')
+    },
+    error: (err) => {
+      console.error('Delete failed');
+      this.toastService.error('something went wrong','error')
+    }
+  });
 
   // ngFor optimization
   trackByEmployeeId(index: number, employee: Employee): number {
