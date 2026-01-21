@@ -54,6 +54,7 @@ employees: Employee[] = [];
       this.toastService.error('something went wrong','error')
     }
   });
+}
 
   // ngFor optimization
   trackByEmployeeId(index: number, employee: Employee): number {
@@ -64,5 +65,5 @@ employees: Employee[] = [];
     this.destroy$.next();
     this.destroy$.complete();
   }
-  
+
 }

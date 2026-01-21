@@ -20,9 +20,9 @@ export const validateEmployee = (
   const { name, email, department, salary } = req.body;
 
   // Name
-  if (!name || typeof name !== 'string' || name.length < 3 || !NAME_REGEX.test(name)) {
+  if (!name || typeof name !== 'string' || name.length < 2 || !NAME_REGEX.test(name)) {
     return res.status(400).json({
-      message: 'Invalid name. Only letters and spaces allowed (min 3 chars).'
+      message: 'Invalid name. Only letters and spaces allowed (min 2 chars).'
     });
   }
 
