@@ -107,3 +107,9 @@ DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=employee_db
 
+
+# For angular Debugging Porpose use in inspct console
+ng.getOwningComponent($0) for selected item
+ng.getComponent($0)
+ng.getContext($0)
+etc.

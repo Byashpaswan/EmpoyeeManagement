@@ -43,6 +43,7 @@ export class Employee implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       department: ['', Validators.required],
       salary: ['', [Validators.required,Validators.min(1)]],
+      dob :['',[Validators.required]]
     });
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));

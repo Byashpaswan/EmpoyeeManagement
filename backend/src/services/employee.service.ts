@@ -4,8 +4,8 @@ import { Employee } from "../models/employee.model";
 
 export const createEmployee = async (employee: Employee) => {
   const [result] = await db.execute(
-    'INSERT INTO employees (name, email, department, salary) VALUES (?, ?, ?, ?)',
-    [employee.name, employee.email, employee.department, employee.salary]
+    'INSERT INTO employees (name, email, department, salary,dob) VALUES (?, ?, ?, ?,?)',
+    [employee.name, employee.email, employee.department, employee.salary,employee.dob]
   );
   return result;
 };

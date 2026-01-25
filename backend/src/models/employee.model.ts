@@ -5,4 +5,5 @@ export interface Employee {
   department: string;
   salary: number;
   created_at?: Date;
+  dob:Date
 }

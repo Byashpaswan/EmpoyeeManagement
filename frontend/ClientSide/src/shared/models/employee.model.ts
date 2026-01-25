@@ -4,4 +4,5 @@ export interface Employee {
   email: string;
   department: string;
   salary: number;
+  dob:Date
 }
