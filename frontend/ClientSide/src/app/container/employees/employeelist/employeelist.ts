@@ -19,6 +19,7 @@ employees: Employee[] = [];
 
   // cleanup stream
   private destroy$ = new Subject<void>();
+  date:Date = new Date()
 
   constructor(private employeeService: EmployeeService,private toastService:ToastrService) {}
 

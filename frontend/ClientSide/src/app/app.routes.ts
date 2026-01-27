@@ -1,5 +1,15 @@
 import { Routes } from '@angular/router';
 export const routes: Routes = [
+  {
+    path:'register',
+    loadComponent:()=>
+      import('./container/register/register').then((c)=>c.Register)
+  },
+  {
+   path:'login',
+   loadComponent:()=>
+     import('./container/login/login').then((c)=>c.Login)
+  },
  
   {
     path: 'dashboard',
