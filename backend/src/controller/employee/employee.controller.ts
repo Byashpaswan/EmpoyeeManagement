@@ -1,6 +1,5 @@
 import { Request,Response,NextFunction } from "express";
  import * as employeeService  from "../../services/employee.service"
-
  export const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await employeeService.createEmployee(req.body);
@@ -54,8 +53,42 @@ export const remove = async (req: Request, res: Response, next: NextFunction) =>
 export const removeAll = async (_req: Request, res: Response, next: NextFunction) => {
   try {
     await employeeService.deleteAllEmployees();
-    res.json({ message: 'All employees deleted successfully' });
+   return res.json({ message: 'All employees deleted successfully' });
   } catch (err) {
     next(err);
   }
 };
+
+export const login = async(_req:Request,res:Response,next:NextFunction)=>{
+  try{
+
+    const {email,password} = _req.body
+    const result= await employeeService.loginUser(email,password);
+
+    return res.status(200).json({
+      success:true,
+      message:"Login successFully",
+      token:result.token,
+      user:result.user
+
+    })
+  }
+  catch(err){
+    console.error(err)
+     next(err);
+  }
+}
+
+export const register = async(_req:Request,res:Response,next:NextFunction)=>{
+  try {
+     const result = await employeeService.registerUser(_req.body);
+     return res.status(201).json({
+      message:"register user successFully",
+      success:true,
+      data:result
+     })
+  } catch (error) {
+    next(error)
+    
+  }
+}

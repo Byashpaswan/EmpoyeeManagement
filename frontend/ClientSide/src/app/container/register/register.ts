@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValidationService } from '../../services/validation.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class Register implements OnInit {
 
 registerForm!:FormGroup
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder,private AuthService:AuthService){
 
   }
 
@@ -27,7 +28,7 @@ registerForm!:FormGroup
 
   confirmPassword: ['', [Validators.required]], 
   role: ['EMPLOYEE', [Validators.required]], // Defaulted to EMPLOYEE
-  dept: ['', [Validators.required]],
+  department: ['', [Validators.required]],
   joiningDate: [new Date().toISOString().substring(0, 10), [Validators.required]], // Defaults to today
   phoneNumber: ['', [Validators.pattern('^[0-9]{10}$')]] 
 }, {
@@ -42,6 +43,16 @@ registerForm!:FormGroup
   if (this.registerForm.valid) {
     console.log("Form Data:", this.registerForm.value);
     // Proceed with API call
+    this.AuthService.register(this.registerForm.value).subscribe({
+      next:(res)=>{
+        console.log("res--",res)
+
+      },
+      error:(err)=>{
+        console.log("error--",err)
+
+      }
+    })
   } else {
     this.registerForm.markAllAsTouched();
   }

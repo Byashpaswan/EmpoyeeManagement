@@ -12,6 +12,8 @@ const  employeeRouter = Router();
    employeeRouter.put('/:id',validateEmployee,employeeController.update)
    employeeRouter.delete('/:id',employeeController.remove);
    employeeRouter.delete('/',employeeController.removeAll);
+   employeeRouter.post('/register',employeeController.register);
+   employeeRouter.post('/login',employeeController.login)
 
 export default employeeRouter;
 
